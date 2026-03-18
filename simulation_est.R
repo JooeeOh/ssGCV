@@ -1,4 +1,4 @@
-rm(list=ls())
+# rm(list=ls())
 library(MASS)
 library(glmnet)
 library(HDeconometrics)
@@ -15,14 +15,12 @@ for(i in 1:p){
 
 res_GCV_type1 = matrix(numeric(5*num),ncol=5); colnames(res_GCV_type1) = c("Ave", "TN", "TP", "MSE", "AUC")
 
-
 L <-3
 E <-3
 H <-3
 T.s <- seq(from=0.1,to=0.5,length=L)
 T.alpha <- seq(from=0.1,to=0.9,length=E)
 T.H <-seq(from=0.1,to=3,length=H)
-
 
 ts <- Sys.time()
 
@@ -55,7 +53,6 @@ for (i in 1:n){
 }
 colnames(t_X)<-paste("X",c(1:p))
 
-
 sam <- sample(1:n, n*0.9)
 sam20 <- setdiff(1:n, sam)
 rge<-scale(t_X[sam,],center=TRUE,scale=TRUE)
@@ -87,7 +84,6 @@ for (tp in 1:nrow(PARA)){
   } 
   PARA[tp,c(4:(4+nrow(rge)-1))]<-CV.ERROR.al
 }
-
 
 opt_idx <- apply(PARA[, 4:(3 + length(me)), drop = FALSE], 2, which.min)  
 opt_mx <- PARA[opt_idx, 1:3, drop = FALSE]
